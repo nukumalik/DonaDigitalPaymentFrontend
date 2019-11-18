@@ -1,16 +1,46 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react'
 import {View, Text, StyleSheet, TextInput} from 'react-native'
+import {Button} from 'native-base'
+import PinView from 'react-native-pin-view'
 
 //import component
-import Thumnailscycle from '../component/Thumnailscycle'
+import Thumnailscycle from '../../component/Thumnailscycle'
+import ModalOTP from '../../component/ModalOTP'
+import InputOTP from '../../component/InputOTP'
 export default class Login extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			phoneNumber: '',
+			isNext: true,
+			nextOpct: 0.5,
+			isLoading: false,
+		}
+	}
+
+	phoneNumberHandle = phoneNumber => {
+		if (phoneNumber === '0') {
+			return ''
+		}
+
+		if (phoneNumber.length >= 9) {
+			this.setState({
+				isNext: false,
+				nextOpct: 1,
+			})
+			console.log(this.state.isNext)
+		} else {
+			this.setState({
+				isNext: true,
+				nextOpct: 0.5,
+			})
+		}
+		this.setState({phoneNumber})
 	}
 
 	render() {
+		const {phoneNumber, isNext, nextOpct} = this.state
 		return (
 			<View style={style.container}>
 				<View style={style.head}>
@@ -18,17 +48,39 @@ export default class Login extends Component {
 						<Text style={style.text}> dona </Text>
 					</View>
 					<View style={{flex: 1}}>
-						<Text style={style.textHolder}> Lanjut </Text>
+						{/* <Button transparent disabled={isNext}>
+							<Text
+								style={{
+									opacity: nextOpct,
+									justifyContent: 'flex-end',
+									color: '#fff',
+									fontSize: 20,
+								}}>
+								Lanjut
+							</Text>
+						</Button> */}
+						<ModalOTP next={isNext} />
 					</View>
 				</View>
 				<Text style={style.NormalText}> Masukan nomor telepon anda untuk masuk atau buat akun baru.</Text>
 				<View style={style.phoneWrap}>
 					<Text style={style.Country}>+62</Text>
-					<TextInput keyboardType="number-pad" style={style.phoneNumber} placeholderTextColor="white" maxLength={13} placeholder="Nomor Telepon" />
+					<TextInput
+						autoFocus={true}
+						keyboardType="phone-pad"
+						style={style.phoneNumber}
+						placeholderTextColor="white"
+						maxLength={13}
+						placeholder="Nomor Telepon"
+						onChangeText={this.phoneNumberHandle}
+						value={phoneNumber}
+						blurOnSubmit={false}
+					/>
 				</View>
 				<View style={style.company}>
 					<Text style={style.NormalText}>DANA juga terhubung dengan</Text>
 				</View>
+
 				<View style={style.head}>
 					<Thumnailscycle image="https://cdn6.aptoide.com/imgs/c/1/5/c15fae86d87009d6adc48f673eacb63a_icon.png?w=240" />
 					<Thumnailscycle image="https://lh3.googleusercontent.com/J9ybXP72Fxpp5BzWcDyXUgeRiPhGii6f_jXK1PMYmHrt-pAdkFh8Uynk2salu5RI-qBG" />
@@ -48,18 +100,17 @@ const style = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#108EE9',
 	},
-	head: {flexDirection: 'row', height: 80, marginTop: 10},
+	head: {flexDirection: 'row', height: 80},
 	textHolder: {
 		justifyContent: 'flex-end',
 		color: '#fff',
 		fontSize: 20,
-		opacity: 0.5,
 	},
 	text: {
 		fontSize: 35,
 		fontWeight: 'bold',
 		textTransform: 'uppercase',
-		fontFamily: 'strenuousbl',
+		fontFamily: 'I hate Comic Sans',
 		color: '#fff',
 		textAlign: 'center',
 		letterSpacing: 10,
@@ -83,8 +134,7 @@ const style = StyleSheet.create({
 		color: '#fff',
 		opacity: 0.4,
 		marginLeft: 10,
-		marginBottom: -5,
-		lineHeight: 2,
+		marginBottom: -7,
 		borderBottomWidth: 1,
 		borderBottomColor: 'white',
 		borderBottomLeftRadius: 100,

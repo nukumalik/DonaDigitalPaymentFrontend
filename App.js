@@ -4,8 +4,8 @@ import {createStackNavigator} from 'react-navigation-stack'
 
 //import page
 import SplashScreen from './src/screens/SplashScreen'
-import Login from './src/screens/Login'
-import PreLogin from './src/screens/PreLogin'
+import Login from './src/screens/users/Login'
+import PreLogin from './src/screens/users/PreLogin'
 
 export default class App extends Component {
 	render() {

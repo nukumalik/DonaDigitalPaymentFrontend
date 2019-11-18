@@ -38,6 +38,8 @@
 		244AE13FBA3946D4AD5F1FCC /* strenuous bl.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30B73A42A8B14A06863700CB /* strenuous bl.ttf */; };
 		DA39462AB16848019E08D79D /* strenuous.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2FA07638DA342369814CC3D /* strenuous.ttf */; };
 		B80DD1658A3B4F329331C851 /* strenuousbl.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE382BDAE11544CC96DF5777 /* strenuousbl.ttf */; };
+		3CBCF74811A54B8686DEA95F /* Libertad-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2BBD9B4F383C4B858C1F11E4 /* Libertad-Medium.otf */; };
+		ADDE02D18C0E4797B29F7DB5 /* comic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3BD4E090FDD4E25A6BDB823 /* comic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		30B73A42A8B14A06863700CB /* strenuous bl.ttf */ = {isa = PBXFileReference; name = "strenuous bl.ttf"; path = "../assets/fonts/strenuous bl.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D2FA07638DA342369814CC3D /* strenuous.ttf */ = {isa = PBXFileReference; name = "strenuous.ttf"; path = "../assets/fonts/strenuous.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CE382BDAE11544CC96DF5777 /* strenuousbl.ttf */ = {isa = PBXFileReference; name = "strenuousbl.ttf"; path = "../assets/fonts/strenuousbl.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2BBD9B4F383C4B858C1F11E4 /* Libertad-Medium.otf */ = {isa = PBXFileReference; name = "Libertad-Medium.otf"; path = "../assets/fonts/Libertad-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C3BD4E090FDD4E25A6BDB823 /* comic.ttf */ = {isa = PBXFileReference; name = "comic.ttf"; path = "../assets/fonts/comic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +233,8 @@
 				30B73A42A8B14A06863700CB /* strenuous bl.ttf */,
 				D2FA07638DA342369814CC3D /* strenuous.ttf */,
 				CE382BDAE11544CC96DF5777 /* strenuousbl.ttf */,
+				2BBD9B4F383C4B858C1F11E4 /* Libertad-Medium.otf */,
+				C3BD4E090FDD4E25A6BDB823 /* comic.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -393,6 +399,8 @@
 				244AE13FBA3946D4AD5F1FCC /* strenuous bl.ttf in Resources */,
 				DA39462AB16848019E08D79D /* strenuous.ttf in Resources */,
 				B80DD1658A3B4F329331C851 /* strenuousbl.ttf in Resources */,
+				3CBCF74811A54B8686DEA95F /* Libertad-Medium.otf in Resources */,
+				ADDE02D18C0E4797B29F7DB5 /* comic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
