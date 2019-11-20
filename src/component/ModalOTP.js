@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {View, Text, TextInput} from 'react-native'
 import {Button, Spinner} from 'native-base'
 import RBSheet from 'react-native-raw-bottom-sheet'
+import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
+import {withNavigationFocus, withNavigation} from 'react-navigation'
 
 import Pin from './Pin'
 
@@ -11,6 +13,8 @@ class Example extends Component {
 		this.state = {
 			isLoading: false,
 			hasAccount: false,
+			code: '',
+			isChecked: false,
 		}
 	}
 
@@ -23,8 +27,19 @@ class Example extends Component {
 		console.log(number)
 	}
 
+	pinInput = React.createRef()
+
+	_checkCode = code => {
+		if (code != '123456') {
+			this.pinInput.current.shake().then(() => this.setState({code: ''}))
+		} else {
+			this.props.navigation.navigate('Home')
+			this.setState({isChecked: true})
+		}
+	}
+
 	render() {
-		const {isLoading, hasAccount} = this.state
+		const {isLoading, hasAccount, code} = this.state
 		this._checkPhoneNumber(this.props.number)
 		return (
 			<View>
@@ -57,7 +72,7 @@ class Example extends Component {
 							borderTopRightRadius: 20,
 						},
 					}}>
-					{!this.props.hasAccount && (
+					{!this.props.hasAccount && !this.state.isChecked && (
 						<View style={{flex: 1}}>
 							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
 								<Text style={{fontWeight: 'bold', margin: 10}}>Masukan OTP</Text>
@@ -126,13 +141,52 @@ class Example extends Component {
 							</View>
 						</View>
 					)}
-					{this.props.hasAccount && (
+					{this.props.hasAccount && !this.state.isChecked && (
 						<View style={{flex: 1}}>
 							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
 								<Text style={{fontWeight: 'bold', margin: 10}}>Anda Telah terdaftar di DANA melalui DANA App</Text>
 								<Text>Masukan PIN DANA ANDA</Text>
 							</View>
-							<Pin />
+							{/* <Pin /> */}
+							<View style={style.container}>
+								{/* Custom placeholder & mask */}
+								<View style={style.section}>
+									<SmoothPinCodeInput
+										ref={this.pinInput}
+										value={code}
+										codeLength={6}
+										autoFocus={true}
+										onTextChange={code => this.setState({code})}
+										onFulfill={this._checkCode}
+										onBackspace={() => console.log('No more back.')}
+										placeholder={
+											<View
+												style={{
+													width: 5,
+													height: 5,
+													borderRadius: 25,
+													opacity: 0.3,
+													backgroundColor: 'black',
+												}}></View>
+										}
+										mask={
+											<View
+												style={{
+													width: 5,
+													height: 5,
+													borderRadius: 25,
+													backgroundColor: 'black',
+												}}></View>
+										}
+										maskDelay={1000}
+										password={true}
+										cellStyle={null}
+										cellStyleFocused={null}
+										value={code}
+									/>
+								</View>
+							</View>
+
 							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
 								<Button transparent>
 									<Text style={style.textfooter}>Lupa PIN?</Text>
@@ -148,7 +202,7 @@ class Example extends Component {
 
 const YourOwnComponent = () => {}
 
-export default Example
+export default withNavigation(Example)
 
 const props = {
 	maxLength: 1,
@@ -193,5 +247,20 @@ const style = {
 	textfooter: {
 		color: '#108EE9',
 		textTransform: 'uppercase',
+	},
+
+	container: {
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	section: {
+		alignItems: 'center',
+		margin: 16,
+	},
+	title: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		marginBottom: 8,
 	},
 }

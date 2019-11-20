@@ -2,7 +2,7 @@ import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
 
-export default class App extends React.Component {
+export default class Pin extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -23,6 +23,7 @@ export default class App extends React.Component {
 
 	render() {
 		const {code, password} = this.state
+		console.log(code)
 		return (
 			<View style={styles.container}>
 				{/* Custom placeholder & mask */}
