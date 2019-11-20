@@ -24,8 +24,8 @@ const StackNavigation = createStackNavigator(
 		SplashScreen: {screen: SplashScreen},
 		Login: {screen: Login},
 		PreLogin: {screen: PreLogin},
-		Home: {screen: Home},
 		Pin: {screen: Pin},
+		Home: {screen: Home},
 		ModalOTP: {screen: ModalOTP},
 		ListBerita: {screen: ListBerita},
 		ListTransaction: {screen: ListTransaction},
@@ -33,8 +33,8 @@ const StackNavigation = createStackNavigator(
 		Pulsa: {screen: Pulsa},
 	},
 	{
-		initialRouteName: 'Home',
-		// headerMode: 'none',
+		initialRouteName: 'Login',
+		headerMode: 'none',
 	}
 )
 const AppContainer = createAppContainer(StackNavigation)

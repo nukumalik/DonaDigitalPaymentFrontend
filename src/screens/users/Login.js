@@ -43,6 +43,7 @@ export default class Login extends Component {
 				hasAccount: true,
 			})
 		}
+		console.log(phoneNumber)
 		this.setState({phoneNumber})
 	}
 
