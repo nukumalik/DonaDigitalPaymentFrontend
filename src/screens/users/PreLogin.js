@@ -10,7 +10,7 @@ const componentName = props => {
 			<View style={style.head}>
 				<Text style={style.text}>dona</Text>
 			</View>
-			<View style={{height: 600, marginTop: 5}}>
+			<View style={{height: '70%', marginTop: 5}}>
 				<SlideImage />
 			</View>
 			<View style={style.head}>
