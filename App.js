@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 
+//redux
+import {Provider} from 'react-redux'
+import store from './src/redux/store'
+
 //import page
 import SplashScreen from './src/screens/SplashScreen'
 import Login from './src/screens/users/Login'
@@ -16,7 +20,11 @@ import Pulsa from './src/screens/pulses/Pulsa'
 
 export default class App extends Component {
 	render() {
-		return <AppContainer />
+		return (
+			<Provider store={store}>
+				<AppContainer />
+			</Provider>
+		)
 	}
 }
 const StackNavigation = createStackNavigator(
@@ -33,7 +41,7 @@ const StackNavigation = createStackNavigator(
 		Pulsa: {screen: Pulsa},
 	},
 	{
-		initialRouteName: 'Login',
+		initialRouteName: 'SplashScreen',
 		headerMode: 'none',
 	}
 )

@@ -3,21 +3,28 @@ import React, {Component} from 'react'
 import {View, Text, StyleSheet, TextInput} from 'react-native'
 import {Button} from 'native-base'
 import PinView from 'react-native-pin-view'
+import qs from 'qs'
 
 //import component
 import Thumnailscycle from '../../component/Thumnailscycle'
 import ModalOTP from '../../component/ModalOTP'
 import InputOTP from '../../component/InputOTP'
 import Pin from '../../component/Pin'
-export default class Login extends Component {
+
+import {connect} from 'react-redux'
+import {phoneCheck} from '../../redux/action/user'
+
+class Login extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			phoneNumber: '',
+			phoneNumberProps: '',
 			isNext: true,
 			nextOpct: 0.5,
 			isLoading: false,
 			hasAccount: false,
+			isPhoneChecked: false,
 		}
 	}
 
@@ -38,13 +45,32 @@ export default class Login extends Component {
 				nextOpct: 0.5,
 			})
 		}
-		if (phoneNumber === '123456789') {
-			this.setState({
-				hasAccount: true,
-			})
-		}
+		// if (phoneNumber === '123456789') {
+		// 	this.setState({
+		// 		hasAccount: true,
+		// 	})
+		// }
 		console.log(phoneNumber)
 		this.setState({phoneNumber})
+	}
+
+	onButtonNextHandle = () => {
+		let dataCheck = {
+			phone: this.state.phoneNumber,
+		}
+		this.setState({
+			isPhoneChecked: true,
+			phoneNumberProps: this.state.phoneNumber,
+		})
+		this.props.dispatch(phoneCheck(qs.stringify(dataCheck)))
+	}
+
+	onLogin = code => {
+		let dataLogin = {
+			phone: this.state.phoneNumber,
+			pin: code,
+		}
+		this.props.dispatch(login(qs.stringify(dataLogin)))
 	}
 
 	render() {
@@ -67,7 +93,13 @@ export default class Login extends Component {
 								Lanjut
 							</Text>
 						</Button> */}
-						<ModalOTP hasAccount={this.state.hasAccount} next={isNext} />
+						<ModalOTP
+							hasAccount={this.state.hasAccount}
+							isPhoneChecked={this.state.isPhoneChecked}
+							next={isNext}
+							phoneNumber={this.state.phoneNumberProps}
+							onButtonNextHandle={this.onButtonNextHandle}
+						/>
 					</View>
 				</View>
 
@@ -100,6 +132,12 @@ export default class Login extends Component {
 		)
 	}
 }
+
+const mapStateToProps = state => ({
+	user: state.user,
+})
+
+export default connect(mapStateToProps)(Login)
 
 const style = StyleSheet.create({
 	container: {

@@ -4,10 +4,14 @@ import {Button, Spinner} from 'native-base'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
 import {withNavigationFocus, withNavigation} from 'react-navigation'
+import qs from 'qs'
 
 import Pin from './Pin'
 
-class Example extends Component {
+import {connect} from 'react-redux'
+import {login} from '../redux/action/user'
+
+class ModalOTP extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -15,6 +19,7 @@ class Example extends Component {
 			hasAccount: false,
 			code: '',
 			isChecked: false,
+			isRBSheetOpened: false,
 		}
 	}
 
@@ -30,28 +35,45 @@ class Example extends Component {
 	pinInput = React.createRef()
 
 	_checkCode = code => {
-		if (code != '123456') {
-			this.pinInput.current.shake().then(() => this.setState({code: ''}))
-		} else {
-			this.props.navigation.navigate('Home')
-			this.setState({isChecked: true})
+		// if (code != '123456') {
+		// 	this.pinInput.current.shake().then(() => this.setState({code: ''}))
+		// } else {
+		// 	this.props.navigation.navigate('Home')
+		// 	this.setState({isChecked: true})
+		// 	this.RBSheet.close()
+		// }
+		let dataLogin = {
+			phone: this.props.phoneNumber,
+			pin: code,
 		}
+		this.props
+			.dispatch(login(qs.stringify(dataLogin)))
+			.then(() => {
+				if (this.props.user.isLogin) {
+					this.props.navigation.navigate('Home')
+					this.setState({isChecked: true})
+					this.RBSheet.close()
+				} else {
+					this.pinInput.current.shake().then(() => this.setState({code: ''}))
+				}
+			})
+			.catch(err => {
+				this.pinInput.current.shake().then(() => this.setState({code: ''}))
+			})
 	}
 
 	render() {
 		const {isLoading, hasAccount, code} = this.state
 		this._checkPhoneNumber(this.props.number)
+		if (this.props.isPhoneChecked && !this.state.isRBSheetOpened && !this.props.user.isLoading) {
+			this.RBSheet.open()
+			this.setState({isLoading: true, isRBSheetOpened: true})
+		}
 		return (
 			<View>
 				{isLoading && <Spinner size="small" color="white" style={{marginTop: -20}}></Spinner>}
 				{!isLoading && (
-					<Button
-						transparent
-						disabled={this.props.next}
-						onPress={() => {
-							this.RBSheet.open()
-							this.setState({isLoading: true})
-						}}>
+					<Button transparent disabled={this.props.next} onPress={this.props.onButtonNextHandle}>
 						<Text style={style.textButton}>Lanjut</Text>
 					</Button>
 				)}
@@ -72,7 +94,7 @@ class Example extends Component {
 							borderTopRightRadius: 20,
 						},
 					}}>
-					{!this.props.hasAccount && !this.state.isChecked && (
+					{!this.props.user.isRegistered && !this.state.isChecked && (
 						<View style={{flex: 1}}>
 							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
 								<Text style={{fontWeight: 'bold', margin: 10}}>Masukan OTP</Text>
@@ -141,7 +163,7 @@ class Example extends Component {
 							</View>
 						</View>
 					)}
-					{this.props.hasAccount && !this.state.isChecked && (
+					{this.props.user.isRegistered && !this.state.isChecked && (
 						<View style={{flex: 1}}>
 							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
 								<Text style={{fontWeight: 'bold', margin: 10}}>Anda Telah terdaftar di DANA melalui DANA App</Text>
@@ -202,7 +224,11 @@ class Example extends Component {
 
 const YourOwnComponent = () => {}
 
-export default withNavigation(Example)
+const mapStateToProps = state => ({
+	user: state.user,
+})
+
+export default connect(mapStateToProps)(withNavigation(ModalOTP))
 
 const props = {
 	maxLength: 1,
