@@ -7,6 +7,8 @@ import SplashScreen from './src/screens/SplashScreen'
 import Login from './src/screens/users/Login'
 import PreLogin from './src/screens/users/PreLogin'
 import Home from './src/screens/Home'
+import Pin from './src/component/Pin'
+import ModalOTP from './src/component/ModalOTP'
 
 export default class App extends Component {
 	render() {
@@ -19,6 +21,8 @@ const StackNavigation = createStackNavigator(
 		Login: {screen: Login},
 		PreLogin: {screen: PreLogin},
 		Home: {screen: Home},
+		Pin: {screen: Pin},
+		ModalOTP: {screen: ModalOTP},
 	},
 	{
 		initialRouteName: 'Home',

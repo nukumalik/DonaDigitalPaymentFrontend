@@ -8,6 +8,7 @@ import PinView from 'react-native-pin-view'
 import Thumnailscycle from '../../component/Thumnailscycle'
 import ModalOTP from '../../component/ModalOTP'
 import InputOTP from '../../component/InputOTP'
+import Pin from '../../component/Pin'
 export default class Login extends Component {
 	constructor(props) {
 		super(props)
@@ -16,6 +17,7 @@ export default class Login extends Component {
 			isNext: true,
 			nextOpct: 0.5,
 			isLoading: false,
+			hasAccount: false,
 		}
 	}
 
@@ -34,6 +36,11 @@ export default class Login extends Component {
 			this.setState({
 				isNext: true,
 				nextOpct: 0.5,
+			})
+		}
+		if (phoneNumber === '123456789') {
+			this.setState({
+				hasAccount: true,
 			})
 		}
 		this.setState({phoneNumber})
@@ -59,9 +66,10 @@ export default class Login extends Component {
 								Lanjut
 							</Text>
 						</Button> */}
-						<ModalOTP next={isNext} />
+						<ModalOTP hasAccount={this.state.hasAccount} next={isNext} />
 					</View>
 				</View>
+
 				<Text style={style.NormalText}> Masukan nomor telepon anda untuk masuk atau buat akun baru.</Text>
 				<View style={style.phoneWrap}>
 					<Text style={style.Country}>+62</Text>
@@ -100,7 +108,7 @@ const style = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#108EE9',
 	},
-	head: {flexDirection: 'row', height: 80},
+	head: {flexDirection: 'row', marginTop: 10},
 	textHolder: {
 		justifyContent: 'flex-end',
 		color: '#fff',
@@ -128,6 +136,8 @@ const style = StyleSheet.create({
 		fontSize: 30,
 		color: '#fff',
 		opacity: 0.4,
+		marginTop: 10,
+		alignItems: 'flex-end',
 	},
 	phoneNumber: {
 		fontSize: 30,
@@ -142,7 +152,7 @@ const style = StyleSheet.create({
 	},
 	phoneWrap: {
 		flexDirection: 'row',
-		height: 40,
+
 		justifyContent: 'center',
 		marginTop: 50,
 	},

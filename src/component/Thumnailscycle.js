@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
-
+import React, {Component} from 'react'
+import {View, Text, Image, StyleSheet} from 'react-native'
 
 const Thumnailscycle = props => {
-	return(
-		<View>
-			<Image style={style.imageThumbnails} source={{uri:props.image}} />
+	return (
+		<View style={{flexDirection: 'column'}}>
+			<Image style={style.imageThumbnails} source={{uri: props.image}} />
+			<Text>{props.text}</Text>
 		</View>
 	)
 }
@@ -14,13 +14,13 @@ const Thumnailscycle = props => {
 export default Thumnailscycle
 
 const style = {
-	imageThumbnails:{
+	imageThumbnails: {
 		borderRadius: 125,
-		width :40,
-		height:40,
-		borderColor:'white',
-		borderWidth:1,
+		width: 40,
+		height: 40,
+		borderColor: 'white',
+		borderWidth: 1,
 		backgroundColor: 'white',
-		marginLeft:10,
+		marginLeft: 10,
 	},
 }

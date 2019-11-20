@@ -1,6 +1,11 @@
 import React, {Component} from 'react'
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native'
-import {Icon, Button, Card, CardItem, Left, Row} from 'native-base'
+import {Icon, Button, Card, CardItem, Left, Row, Col, Body, Right, Thumbnail, List, ListItem} from 'native-base'
+import {TouchableOpacity} from 'react-native-gesture-handler'
+
+import Corousel from '../component/Corousel'
+import ScrollContent from '../component/ScrollContent'
+import ImageCircle from '../component/Thumnailscycle'
 
 export default class Home extends Component {
 	constructor(props) {
@@ -49,13 +54,13 @@ export default class Home extends Component {
 					</View>
 					<ScrollView>
 						{/* Fav menu section */}
-						<View style={{height: 80, backgroundColor: '#108EE9', alignItems: 'center'}}></View>
+						<View style={{height: 110, backgroundColor: '#108EE9', alignItems: 'center'}}></View>
 						{/* View Card */}
-						<View style={{marginTop: -80, alignItems: 'center'}}>
+						<View style={{marginTop: -110, alignItems: 'center'}}>
 							<View
 								style={{
 									flexDirection: 'column',
-									height: 245,
+									height: 300,
 									backgroundColor: 'white',
 									shadowColor: '#545454',
 									alignSelf: 'stretch',
@@ -70,7 +75,6 @@ export default class Home extends Component {
 								{/* Beli pulsa yuk */}
 								<View
 									style={{
-										flex: 1,
 										flexDirection: 'row',
 										justifyContent: 'space-between',
 									}}>
@@ -84,7 +88,14 @@ export default class Home extends Component {
 
 									<Button
 										title="Beli"
-										style={{borderRadius: 5, width: 80, justifyContent: 'center', alignItems: 'center', backgroundColor: '#108EE9'}}>
+										style={{
+											borderRadius: 5,
+											width: 80,
+											height: 30,
+											justifyContent: 'center',
+											alignItems: 'center',
+											backgroundColor: '#108EE9',
+										}}>
 										<Text style={{color: 'white'}}>Beli</Text>
 									</Button>
 								</View>
@@ -127,44 +138,74 @@ export default class Home extends Component {
 									</View>
 								</View>
 							</View>
-							<View style={{flex: 1}}>
+							<View style={{flex: 1, alignSelf: 'stretch', marginHorizontal: 15, borderRadius: 5}}>
 								<Card style={{height: 140}}>
-									<Left>
-										<Row>
-											<Text>Ada Promo Apa?</Text>
-										</Row>
-									</Left>
-									<CardItem></CardItem>
+									<CardItem>
+										<Left>
+											<Body>
+												<Text style={{fontSize: 12, fontWeight: 'bold'}}>Ada Promo Apa?</Text>
+												<Text style={{fontSize: 10}}>Hidup lebih indah dengan promo!</Text>
+											</Body>
+										</Left>
+										<Right>
+											<Button
+												style={{width: 100, justifyContent: 'center', borderColor: '#108EE9', height: 35, borderRadius: 5}}
+												bordered>
+												<Text style={{color: '#108EE9'}}>LIHAT SEMUA</Text>
+											</Button>
+										</Right>
+									</CardItem>
+									<CardItem cardBody>
+										<Corousel />
+									</CardItem>
 								</Card>
 							</View>
-							<View style={{flex: 1}}>
-								<Card style={{height: 140}}>
-									<Left>
-										<Row>
-											<Text>Ada Promo Apa?</Text>
-										</Row>
-									</Left>
-									<CardItem></CardItem>
-								</Card>
+							<View style={{flex: 1, marginTop: 10, alignSelf: 'stretch', marginHorizontal: 15, borderRadius: 5}}>
+								<ScrollView horizontal>
+									<ScrollContent />
+									<ScrollContent />
+									<ScrollContent />
+								</ScrollView>
 							</View>
-							<View style={{flex: 1}}>
+							<View style={{flex: 1, alignSelf: 'stretch', marginHorizontal: 15, borderRadius: 5}}>
 								<Card style={{height: 140}}>
-									<Left>
-										<Row>
-											<Text>Ada Promo Apa?</Text>
-										</Row>
-									</Left>
-									<CardItem></CardItem>
-								</Card>
-							</View>
-							<View style={{flex: 1}}>
-								<Card style={{height: 140}}>
-									<Left>
-										<Row>
-											<Text>Ada Promo Apa?</Text>
-										</Row>
-									</Left>
-									<CardItem></CardItem>
+									<CardItem>
+										<Left>
+											<Body>
+												<Text style={{fontSize: 12, fontWeight: 'bold'}}>Nearby Me</Text>
+												<Text style={{fontSize: 10}}>Temukan merchant DANA didekat kamu!</Text>
+											</Body>
+										</Left>
+										<Right>
+											<Button
+												style={{width: 100, justifyContent: 'center', borderColor: '#108EE9', height: 35, borderRadius: 5}}
+												bordered>
+												<Text style={{color: '#108EE9'}}>LIHAT SEMUA</Text>
+											</Button>
+										</Right>
+									</CardItem>
+									<CardItem style={{backgroundColor: '#F0F9FF'}}>
+										<View style={{flex: 1, justifyContent: 'center', marginLeft: 10}}>
+											<Thumbnail small source={{uri: 'https://i.imgur.com/UYiroysl.jpg'}} />
+											<Text style={{fontSize: 10}}>0,2 km</Text>
+										</View>
+										<View style={{flex: 1, justifyContent: 'center', marginLeft: 10}}>
+											<Thumbnail small source={{uri: 'https://i.imgur.com/UYiroysl.jpg'}} />
+											<Text style={{fontSize: 10}}>0,2 km</Text>
+										</View>
+										<View style={{flex: 1, justifyContent: 'center', marginLeft: 10}}>
+											<Thumbnail small source={{uri: 'https://i.imgur.com/UYiroysl.jpg'}} />
+											<Text style={{fontSize: 10}}>0,2 km</Text>
+										</View>
+										<View style={{flex: 1, justifyContent: 'center', marginLeft: 10}}>
+											<Thumbnail small source={{uri: 'https://i.imgur.com/UYiroysl.jpg'}} />
+											<Text style={{fontSize: 10}}>0,2 km</Text>
+										</View>
+										<View style={{flex: 1, justifyContent: 'center', marginLeft: 10}}>
+											<Thumbnail small source={{uri: 'https://i.imgur.com/UYiroysl.jpg'}} />
+											<Text style={{fontSize: 10}}>0,2 km</Text>
+										</View>
+									</CardItem>
 								</Card>
 							</View>
 						</View>
@@ -174,7 +215,7 @@ export default class Home extends Component {
 				{/* Bottom Navigation  */}
 				<View
 					style={{
-						height: 56,
+						height: 70,
 						flexDirection: 'row',
 						shadowColor: '#545454',
 						shadowRadius: 12,
@@ -185,20 +226,23 @@ export default class Home extends Component {
 						<Image source={require('../../assets/images/beranda.png')} />
 						<Text>Beranda</Text>
 					</View>
+
 					<View style={style.iconNav}>
-						<Icon name="home" />
+						<Image source={require('../../assets/images/riwayat.png')} />
 						<Text>Riwayat</Text>
 					</View>
+
 					<View style={style.iconNav}>
-						<Icon name="home" />
-						<Text>Pay</Text>
+						<Image source={require('../../assets/images/pay.png')} />
 					</View>
+
 					<View style={style.iconNav}>
-						<Icon name="home" />
+						<Image source={require('../../assets/images/pocket.png')} />
 						<Text>Pocket</Text>
 					</View>
+
 					<View style={style.iconNav}>
-						<Icon name="home" />
+						<Image source={require('../../assets/images/saya.png')} />
 						<Text>Saya</Text>
 					</View>
 				</View>
@@ -210,7 +254,7 @@ export default class Home extends Component {
 const style = StyleSheet.create({
 	textNavHeader: {
 		color: 'white',
-		fontSize: 16,
+		fontSize: 12,
 		marginLeft: 5,
 		fontWeight: 'bold',
 	},

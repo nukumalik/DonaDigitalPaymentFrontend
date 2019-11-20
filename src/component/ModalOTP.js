@@ -3,16 +3,29 @@ import {View, Text, TextInput} from 'react-native'
 import {Button, Spinner} from 'native-base'
 import RBSheet from 'react-native-raw-bottom-sheet'
 
+import Pin from './Pin'
+
 class Example extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			isLoading: false,
+			hasAccount: false,
 		}
 	}
 
+	_checkPhoneNumber = number => {
+		console.log(this.state.hasAccount)
+		if (number === '12345') {
+			this.setState({hasAccount: true})
+			console.log(this.state.hasAccount)
+		}
+		console.log(number)
+	}
+
 	render() {
-		const {isLoading} = this.state
+		const {isLoading, hasAccount} = this.state
+		this._checkPhoneNumber(this.props.number)
 		return (
 			<View>
 				{isLoading && <Spinner size="small" color="white" style={{marginTop: -20}}></Spinner>}
@@ -27,6 +40,7 @@ class Example extends Component {
 						<Text style={style.textButton}>Lanjut</Text>
 					</Button>
 				)}
+
 				<RBSheet
 					ref={ref => {
 						this.RBSheet = ref
@@ -43,73 +57,89 @@ class Example extends Component {
 							borderTopRightRadius: 20,
 						},
 					}}>
-					<View style={{flex: 1}}>
-						<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
-							<Text style={{fontWeight: 'bold', margin: 10}}>Masukan OTP</Text>
-							<Text>Kode OTP telah dikirim ke nomor Anda</Text>
-						</View>
+					{!this.props.hasAccount && (
+						<View style={{flex: 1}}>
+							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
+								<Text style={{fontWeight: 'bold', margin: 10}}>Masukan OTP</Text>
+								<Text>Kode OTP telah dikirim ke nomor Anda</Text>
+							</View>
 
-						<View style={{flex: 1, justifyContent: 'center', flexDirection: 'row'}}>
-							<View>
-								<TextInput
-									onChangeText={() => {
-										this.secondTextInput.focus()
-									}}
-									blurOnSubmit={false}
-									autoFocus={true}
-									{...props}
-									style={style.textInput}
-								/>
+							<View style={{flex: 1, justifyContent: 'center', flexDirection: 'row'}}>
+								<View>
+									<TextInput
+										onChangeText={() => {
+											this.secondTextInput.focus()
+										}}
+										blurOnSubmit={false}
+										autoFocus={true}
+										{...props}
+										style={style.textInput}
+									/>
+								</View>
+								<View>
+									<TextInput
+										ref={input => {
+											this.secondTextInput = input
+										}}
+										onChangeText={() => {
+											this.thirdTextInput.focus()
+										}}
+										blurOnSubmit={false}
+										{...props}
+										style={style.textInput}
+									/>
+								</View>
+								<View>
+									<TextInput
+										ref={input => {
+											this.thirdTextInput = input
+										}}
+										onChangeText={() => {
+											this.LastTextInput.focus()
+										}}
+										blurOnSubmit={false}
+										{...props}
+										style={style.textInput}
+									/>
+								</View>
+								<View>
+									<TextInput
+										ref={input => {
+											this.LastTextInput = input
+										}}
+										blurOnSubmit={false}
+										{...props}
+										style={style.textInput}
+									/>
+								</View>
 							</View>
-							<View>
-								<TextInput
-									ref={input => {
-										this.secondTextInput = input
-									}}
-									onChangeText={() => {
-										this.thirdTextInput.focus()
-									}}
-									blurOnSubmit={false}
-									{...props}
-									style={style.textInput}
-								/>
-							</View>
-							<View>
-								<TextInput
-									ref={input => {
-										this.thirdTextInput = input
-									}}
-									onChangeText={() => {
-										this.LastTextInput.focus()
-									}}
-									blurOnSubmit={false}
-									{...props}
-									style={style.textInput}
-								/>
-							</View>
-							<View>
-								<TextInput
-									ref={input => {
-										this.LastTextInput = input
-									}}
-									blurOnSubmit={false}
-									{...props}
-									style={style.textInput}
-								/>
-							</View>
-						</View>
-						<View style={{flex: 1, justifyContent: 'flex-end', marginRight: 20, flexDirection: 'row'}}>
-							{/* <Button transparent>
+							<View style={{flex: 1, justifyContent: 'flex-end', marginRight: 20, flexDirection: 'row'}}>
+								{/* <Button transparent>
 								<Text style={style.textfooter}>kirim via sms</Text>
 							</Button>
 							<Button transparent>
 								<Text style={style.textfooter}>kirim via whatsapp</Text>
 							</Button> */}
-							<Button transparent>
-								<Text style={{fontSize: 17, color: '#BFBFBF', textTransform: 'uppercase', fontWeight: 'bold'}}>kirim ulang (500)</Text>
-							</Button>
+								<Button transparent>
+									<Text style={{fontSize: 17, color: '#BFBFBF', textTransform: 'uppercase', fontWeight: 'bold'}}>kirim ulang (500)</Text>
+								</Button>
+							</View>
 						</View>
-					</View>
+					)}
+					{this.props.hasAccount && (
+						<View style={{flex: 1}}>
+							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
+								<Text style={{fontWeight: 'bold', margin: 10}}>Anda Telah terdaftar di DANA melalui DANA App</Text>
+								<Text>Masukan PIN DANA ANDA</Text>
+							</View>
+							<Pin />
+							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
+								<Button transparent>
+									<Text style={style.textfooter}>Lupa PIN?</Text>
+								</Button>
+							</View>
+						</View>
+					)}
 				</RBSheet>
 			</View>
 		)

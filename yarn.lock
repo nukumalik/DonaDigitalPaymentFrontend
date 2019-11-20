@@ -2570,6 +2570,13 @@ expect@^24.9.0:
     jest-message-util "^24.9.0"
     jest-regex-util "^24.9.0"
 
+expo-constants@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-7.0.1.tgz#87be02b6dae5c44a3246537452a0d77af15d46bf"
+  integrity sha512-n9S6lsEfTAhLY+x/Yrtc1rvVUhuEF+CcSWr/reAIGtk35+PYrAKfV4pbetRtqX9tl947bJv7kBQX6jpwYpeIpQ==
+  dependencies:
+    ua-parser-js "^0.7.19"
+
 extend-shallow@^1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/extend-shallow/-/extend-shallow-1.1.4.tgz#19d6bf94dfc09d76ba711f39b872d21ff4dd9071"
@@ -5433,6 +5440,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-animatable@^1.3.0:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.3.tgz#a13a4af8258e3bb14d0a9d839917e9bb9274ec8a"
+  integrity sha512-2ckIxZQAsvWn25Ho+DK3d1mXIgj7tITkrS4pYDvx96WyOttSvzzFeQnM2od0+FUMzILbdHDsDEqZvnz1DYNQ1w==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-app-intro-slider@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-app-intro-slider/-/react-native-app-intro-slider-3.0.0.tgz#c3620b967503ce410b3d767252392bb6fb2edf97"
@@ -5526,6 +5540,14 @@ react-native-screens@^2.0.0-alpha.11:
   integrity sha512-Sw01mMTvqMgNl4stk7rdcE8LRiISTx7DhXMeBgvmlI4uF1rIZBFcTV5tH/wZ8ld6Pa/H5ASKWAiaaMMxgv1fBw==
   dependencies:
     debounce "^1.2.0"
+
+react-native-smooth-pincode-input@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-smooth-pincode-input/-/react-native-smooth-pincode-input-1.0.9.tgz#4c068ae30aa0cd03bb5bd19c8191c0b4e9b0f8d1"
+  integrity sha512-4V4tyUGJaze55FHuJW/gYVOD3fc4Pd7cTIrv7liTRIXR49y09C2O3XqJUdgNR+UwTgLrTt/8L2lvEuEVUk3kig==
+  dependencies:
+    prop-types "^15.5.10"
+    react-native-animatable "^1.3.0"
 
 react-native-snap-carousel@^3.8.4:
   version "3.8.4"
@@ -6688,7 +6710,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-ua-parser-js@^0.7.18:
+ua-parser-js@^0.7.18, ua-parser-js@^0.7.19:
   version "0.7.20"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.20.tgz#7527178b82f6a62a0f243d1f94fd30e3e3c21098"
   integrity sha512-8OaIKfzL5cpx8eCMAhhvTlft8GYF8b2eQr6JkCyVdrgjcytyOmPCXrqXFcUnhonRpLlh5yxEZVohm6mzaowUOw==
