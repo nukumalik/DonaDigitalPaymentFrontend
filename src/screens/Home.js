@@ -1,16 +1,22 @@
 import React, {Component} from 'react'
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native'
-import {Icon, Button, Card, CardItem, Left, Row, Col, Body, Right, Thumbnail, List, ListItem} from 'native-base'
-import {TouchableOpacity} from 'react-native-gesture-handler'
+import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native'
+import {Button, Card, CardItem, Left, Row, Col, Body, Right, Thumbnail, List, ListItem} from 'native-base'
+import {} from 'react-native-gesture-handler'
 
 import Corousel from '../component/Corousel'
 import ScrollContent from '../component/ScrollContent'
-import ImageCircle from '../component/Thumnailscycle'
+import ListBerita from '../component/ListBerita'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import SafeAreaView from 'react-native-safe-area-view'
 
 export default class Home extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {}
+	}
+
+	static navigationOptions = {
+		header: null,
 	}
 
 	render() {
@@ -22,9 +28,19 @@ export default class Home extends Component {
 						{/* Header section 1*/}
 						<View style={{flex: 2, flexDirection: 'row', padding: 10}}>
 							<View style={{flex: 1}}>
-								<View style={{flex: 1, flexDirection: 'row'}}>
+								<View
+									style={{
+										flex: 1,
+										width: 80,
+										alignItems: 'center',
+										justifyContent: 'space-between',
+										flexDirection: 'row',
+										position: 'relative',
+									}}>
 									<Image source={require('../../assets/images/logo.png')} />
-									<Text style={style.textNavHeader}>Rp</Text>
+									<Text style={{color: 'white', fontSize: 10, opacity: 0.8}}>Rp</Text>
+									<Text style={style.textNavHeader}>0</Text>
+									<Icon size={15} color="white" name="chevron-down" />
 								</View>
 							</View>
 							<View style={{flex: 1, alignItems: 'flex-end'}}>
@@ -149,7 +165,13 @@ export default class Home extends Component {
 										</Left>
 										<Right>
 											<Button
-												style={{width: 100, justifyContent: 'center', borderColor: '#108EE9', height: 35, borderRadius: 5}}
+												style={{
+													width: 100,
+													justifyContent: 'center',
+													borderColor: '#108EE9',
+													height: 35,
+													borderRadius: 5,
+												}}
 												bordered>
 												<Text style={{color: '#108EE9'}}>LIHAT SEMUA</Text>
 											</Button>
@@ -161,12 +183,37 @@ export default class Home extends Component {
 								</Card>
 							</View>
 							<View style={{flex: 1, marginTop: 10, alignSelf: 'stretch', marginHorizontal: 15, borderRadius: 5}}>
-								<ScrollView horizontal>
-									<ScrollContent />
-									<ScrollContent />
-									<ScrollContent />
-								</ScrollView>
+								<SafeAreaView>
+									<ScrollView horizontal>
+										<ScrollContent title="Cara Mengisi dompet DANA anda" image="https://i.imgur.com/UYiroysl.jpg" color="#076AB1" />
+										<ScrollContent
+											title="Cara membayar di toko menggunakan DANA"
+											image="https://i.imgur.com/UYiroysl.jpg"
+											color="#108EE9"
+										/>
+										<ScrollContent
+											title="Kirim uang semakin mudah! Lihat disini caranya"
+											image="https://i.imgur.com/UYiroysl.jpg"
+											color="#076AB1"
+										/>
+										<ScrollContent title="Minta DANA dari teman kamu" image="https://i.imgur.com/UYiroysl.jpg" color="#108EE9" />
+										<ScrollContent
+											title="DANA melindungi transaksi anda dengan jaminan 100%"
+											image="https://i.imgur.com/UYiroysl.jpg"
+											color="#076AB1"
+										/>
+										<ScrollContent
+											title="Pindai kode QR untuk melakukan pembayaran"
+											image="https://i.imgur.com/UYiroysl.jpg"
+											color="#108EE9"
+										/>
+										<ScrollContent title="Isi Saldo di Alfamart" image="https://i.imgur.com/UYiroysl.jpg" color="#076AB1" />
+										<ScrollContent title="Hubungkan kartu dan kredit kamu" image="https://i.imgur.com/UYiroysl.jpg" color="#108EE9" />
+									</ScrollView>
+								</SafeAreaView>
 							</View>
+
+							{/* Nearby */}
 							<View style={{flex: 1, alignSelf: 'stretch', marginHorizontal: 15, borderRadius: 5}}>
 								<Card style={{height: 140}}>
 									<CardItem>
@@ -178,7 +225,13 @@ export default class Home extends Component {
 										</Left>
 										<Right>
 											<Button
-												style={{width: 100, justifyContent: 'center', borderColor: '#108EE9', height: 35, borderRadius: 5}}
+												style={{
+													width: 100,
+													justifyContent: 'center',
+													borderColor: '#108EE9',
+													height: 35,
+													borderRadius: 5,
+												}}
 												bordered>
 												<Text style={{color: '#108EE9'}}>LIHAT SEMUA</Text>
 											</Button>
@@ -208,6 +261,10 @@ export default class Home extends Component {
 									</CardItem>
 								</Card>
 							</View>
+							{/* Daftar Berita */}
+							<View style={{flex: 1, alignSelf: 'stretch', marginHorizontal: 15, borderRadius: 5}}>
+								<ListBerita />
+							</View>
 						</View>
 					</ScrollView>
 				</View>
@@ -227,10 +284,12 @@ export default class Home extends Component {
 						<Text>Beranda</Text>
 					</View>
 
-					<View style={style.iconNav}>
-						<Image source={require('../../assets/images/riwayat.png')} />
-						<Text>Riwayat</Text>
-					</View>
+					<TouchableOpacity onPress={() => this.props.navigation.navigate('ListTransaction')}>
+						<View style={style.iconNav}>
+							<Image source={require('../../assets/images/riwayat.png')} />
+							<Text>Riwayat</Text>
+						</View>
+					</TouchableOpacity>
 
 					<View style={style.iconNav}>
 						<Image source={require('../../assets/images/pay.png')} />
