@@ -9,6 +9,7 @@ import PreLogin from './src/screens/users/PreLogin'
 import Home from './src/screens/Home'
 import Pin from './src/component/Pin'
 import ModalOTP from './src/component/ModalOTP'
+import ListBerita from './src/component/ListBerita'
 
 export default class App extends Component {
 	render() {
@@ -23,6 +24,7 @@ const StackNavigation = createStackNavigator(
 		Home: {screen: Home},
 		Pin: {screen: Pin},
 		ModalOTP: {screen: ModalOTP},
+		ListBerita: {screen: ListBerita},
 	},
 	{
 		initialRouteName: 'Home',

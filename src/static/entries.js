@@ -1,33 +1,28 @@
 export const ENTRIES1 = [
 	{
-		title: 'Beautiful and dramatic Antelope Canyon',
-		subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+		title: 'Dana Loyalty Card',
+		subtitle: 'Ini Cara bikinya',
 		illustration: 'https://i.imgur.com/UYiroysl.jpg',
 	},
 	{
-		title: 'Earlier this morning, NYC',
-		subtitle: 'Lorem ipsum dolor sit amet',
+		title: 'Ajak Teman Pakai DANA',
+		subtitle: 'Asik & Ngguntungin!',
 		illustration: 'https://i.imgur.com/UPrs1EWl.jpg',
 	},
 	{
-		title: 'White Pocket Sunset',
-		subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
+		title: 'DANA di Lazada',
+		subtitle: 'Belanja makin mudah!',
 		illustration: 'https://i.imgur.com/MABUbpDl.jpg',
 	},
 	{
-		title: 'Acrocorinth, Greece',
-		subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+		title: 'Bayar Parkir Gratis',
+		subtitle: 'Parkir di CentrePark!',
 		illustration: 'https://i.imgur.com/KZsmUi2l.jpg',
 	},
 	{
-		title: 'The lone tree, majestic landscape of New Zealand',
-		subtitle: 'Lorem ipsum dolor sit amet',
+		title: 'Kirim Uang Gratis',
+		subtitle: 'Ke bank mana pun!',
 		illustration: 'https://i.imgur.com/2nCt3Sbl.jpg',
-	},
-	{
-		title: 'Middle Earth, Germany',
-		subtitle: 'Lorem ipsum dolor sit amet',
-		illustration: 'https://i.imgur.com/lceHsT6l.jpg',
 	},
 ]
 
