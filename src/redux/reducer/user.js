@@ -1,10 +1,11 @@
 /* eslint-disable indent */
 import AsyncStorage from '@react-native-community/async-storage'
+import qs from 'qs'
 
 const initialState = {
 	isLoading: false,
 	isError: false,
-	username: '',
+	userData: {},
 	phoneNumber: '',
 	isLogin: false,
 	token: '',
@@ -29,13 +30,14 @@ const user = (state = initialState, action) => {
 				isError: true,
 			}
 		case 'LOGIN_FULFILLED':
-			storeData('username', action.payload.data.data.name)
+			// storeData('username', action.payload.data.data.name)
+			storeData('userData', JSON.stringify({...action.payload.data.data}))
 			storeData('token', action.payload.data.token)
 			return {
 				...state,
 				isLoading: false,
 				isError: false,
-				username: action.payload.data.data.name,
+				userData: {...action.payload.data.data},
 				token: action.payload.data.token,
 				isLogin: true,
 			}
@@ -62,7 +64,7 @@ const user = (state = initialState, action) => {
 			return {
 				isLoading: false,
 				isError: false,
-				username: action.userName,
+				userData: {...action.userData},
 				isLogin: true,
 				token: action.token,
 			}

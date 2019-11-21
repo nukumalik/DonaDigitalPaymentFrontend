@@ -18,10 +18,10 @@ export const phoneCheck = dataCheck => {
 	}
 }
 
-export const keepLogin = (userName, token) => {
+export const keepLogin = (userData, token) => {
 	return {
 		type: 'KEEP_LOGIN',
-		userName,
+		userData,
 		token,
 	}
 }

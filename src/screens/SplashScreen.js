@@ -10,15 +10,17 @@ import {keepLogin} from '../redux/action/user'
 class SplashScreen extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			balance: 0,
+		}
 	}
 
 	async componentDidMount() {
 		try {
-			const username = await AsyncStorage.getItem('username')
+			const userData = await AsyncStorage.getItem('userData')
 			const token = await AsyncStorage.getItem('token')
-			if (username !== null && token !== null) {
-				this.props.dispatch(keepLogin(username, token))
+			if (userData !== null && token !== null) {
+				this.props.dispatch(keepLogin(JSON.parse(userData), token))
 			}
 		} catch (e) {
 			// error reading value
@@ -30,13 +32,6 @@ class SplashScreen extends Component {
 				this.props.navigation.navigate('PreLogin')
 			}, 1000)
 		}
-		// setTimeout(() => {
-		// 	if (this.props.user.isLogin) {
-		// 		this.props.navigation.navigate('Home')
-		// 	} else {
-		// 		this.props.navigation.navigate('PreLogin')
-		// 	}
-		// }, 2000)
 	}
 
 	render() {
