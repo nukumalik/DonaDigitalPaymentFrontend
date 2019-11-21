@@ -19,6 +19,8 @@ import ModalOTP from './src/component/ModalOTP'
 import ListBerita from './src/component/ListBerita'
 import ListTransaction from './src/screens/transactions/ListTransaction'
 import DetailTransaction from './src/screens/transactions/DetailTransaction'
+import Topup from './src/screens/transactions/Topup'
+import TopupDetail from './src/screens/transactions/TopupDetail'
 import Pulsa from './src/screens/pulses/Pulsa'
 import TabNav from './src/screens/tabs'
 
@@ -42,6 +44,8 @@ const StackNavigation = createStackNavigator(
 		ListBerita: {screen: ListBerita},
 		ListTransaction: {screen: ListTransaction},
 		DetailTransaction: {screen: DetailTransaction},
+		Topup: {screen: Topup},
+		TopupDetail: {screen: TopupDetail},
 		Pulsa: {screen: Pulsa},
 		InputProfile: {screen: InputProfile},
 		InputPIN: {screen: InputPIN},
