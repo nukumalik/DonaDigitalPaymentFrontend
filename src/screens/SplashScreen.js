@@ -42,7 +42,7 @@ class SplashScreen extends Component {
 	render() {
 		return (
 			<View style={style.container}>
-				<Text style={style.Text}>dana</Text>
+				<Text style={style.Text}>dona</Text>
 			</View>
 		)
 	}
