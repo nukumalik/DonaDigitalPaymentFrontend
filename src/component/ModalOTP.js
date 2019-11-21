@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
-import {View, Text, TextInput} from 'react-native'
+import {View, Text, TextInput, Alert} from 'react-native'
 import {Button, Spinner} from 'native-base'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
 import {withNavigationFocus, withNavigation} from 'react-navigation'
 import qs from 'qs'
+
 import {connect} from 'react-redux'
-import {login} from '../redux/action/user'
+import {login, requestOTP, createUserData} from '../redux/action/user'
+
+import axios from 'axios'
 
 class ModalOTP extends Component {
 	constructor(props) {
@@ -53,11 +56,43 @@ class ModalOTP extends Component {
 			})
 	}
 
+	verifyOtp = async () => {
+		let otpCode = {
+			otp_code: this.props.user.otpCode,
+			phone: this.props.user.phoneNumber,
+		}
+		await axios
+			.post('http://localhost:5000/api/v1/users/verify-otp', qs.stringify(otpCode), {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			})
+			.then(response => {
+				if (response.data.verified) {
+					let userData = {
+						phone: this.props.user.phoneNumber,
+					}
+					this.props.dispatch(createUserData(userData))
+					this.props.navigation.navigate('InputProfile')
+					this.RBSheet.close()
+				} else {
+					Alert.alert('Kode Otp Salah!')
+				}
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}
+
 	render() {
 		const {isLoading, hasAccount, code, onOTP} = this.state
 		this._checkPhoneNumber(this.props.number)
 		if (this.props.isPhoneChecked && !this.state.isRBSheetOpened && !this.props.user.isLoading) {
 			this.RBSheet.open()
+			if (!this.props.user.isRegistered) {
+				let data = {
+					phone: this.props.phoneNumber,
+				}
+				this.props.dispatch(requestOTP(qs.stringify(data)))
+			}
 			this.setState({isLoading: true, isRBSheetOpened: true})
 		}
 		return (
@@ -100,7 +135,9 @@ class ModalOTP extends Component {
 										}}
 										blurOnSubmit={false}
 										autoFocus={true}
+										defaultValue={String(this.props.user.otpCode).charAt(0)}
 										{...props}
+										onSubmitEditing={this.verifyOtp}
 										style={style.textInput}
 									/>
 								</View>
@@ -113,6 +150,7 @@ class ModalOTP extends Component {
 											this.thirdTextInput.focus()
 										}}
 										blurOnSubmit={false}
+										defaultValue={String(this.props.user.otpCode).charAt(1)}
 										{...props}
 										style={style.textInput}
 									/>
@@ -126,6 +164,7 @@ class ModalOTP extends Component {
 											this.LastTextInput.focus()
 										}}
 										blurOnSubmit={false}
+										defaultValue={String(this.props.user.otpCode).charAt(2)}
 										{...props}
 										style={style.textInput}
 									/>
@@ -138,10 +177,8 @@ class ModalOTP extends Component {
 										blurOnSubmit={false}
 										{...props}
 										style={style.textInput}
-										onChangeText={() => {
-											this.props.navigation.navigate('InputProfile')
-											this.RBSheet.close()
-										}}
+										defaultValue={String(this.props.user.otpCode).charAt(3)}
+										onSubmitEditing={this.verifyOtp}
 									/>
 								</View>
 							</View>

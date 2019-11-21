@@ -5,7 +5,7 @@ import {Button} from 'native-base'
 import PinView from 'react-native-pin-view'
 import qs from 'qs'
 import {connect} from 'react-redux'
-import {phoneCheck} from '../../redux/action/user'
+import {createUserData} from '../../redux/action/user'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {TextInput} from 'react-native-gesture-handler'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
@@ -23,6 +23,14 @@ class InputProfile extends Component {
 			isPhoneChecked: false,
 			code: '',
 		}
+	}
+
+	onLanjutButtonHandle = () => {
+		let userData = {
+			pin: this.state.code,
+		}
+		this.props.dispatch(createUserData(userData))
+		this.props.navigation.navigate('InputPIN2')
 	}
 	render() {
 		const {phoneNumber, code, isNext, nextOpct} = this.state
@@ -43,11 +51,7 @@ class InputProfile extends Component {
 					</View>
 
 					<View style={{flex: 1, justifyContent: 'center'}}>
-						<Button
-							transparent
-							onPress={() => {
-								this.props.navigation.navigate('InputPIN2')
-							}}>
+						<Button transparent onPress={this.onLanjutButtonHandle}>
 							<Text style={{color: 'white'}}>Lanjut</Text>
 						</Button>
 					</View>
@@ -70,7 +74,7 @@ class InputProfile extends Component {
 									codeLength={6}
 									autoFocus={true}
 									onTextChange={code => this.setState({code})}
-									onFulfill={this._checkCode}
+									// onFulfill={this._checkCode}
 									onBackspace={() => console.log('No more back.')}
 									placeholder={
 										<View

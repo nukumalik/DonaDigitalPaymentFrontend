@@ -47,7 +47,7 @@ const StackNavigation = createStackNavigator(
 		InputPIN2: {screen: InputPIN2},
 	},
 	{
-		initialRouteName: 'Login',
+		initialRouteName: 'SplashScreen',
 		headerMode: 'none',
 	}
 )

@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native'
 import {Button} from 'native-base'
 import PinView from 'react-native-pin-view'
 import qs from 'qs'
 import {connect} from 'react-redux'
-import {phoneCheck} from '../../redux/action/user'
+import {createUserData} from '../../redux/action/user'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {TextInput} from 'react-native-gesture-handler'
 
@@ -22,10 +22,18 @@ class InputProfile extends Component {
 			isPhoneChecked: false,
 		}
 	}
+
+	onButtonDaftarHandle = () => {
+		let userData = {
+			name: this.state.phoneNumber,
+		}
+		this.props.dispatch(createUserData(userData))
+		this.props.navigation.navigate('InputPIN')
+	}
 	render() {
 		const {phoneNumber, isNext, nextOpct} = this.state
 		return (
-			<View style={style.container}>
+			<ScrollView contentContainerStyle={style.container}>
 				<View style={style.head}>
 					<View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
 						<Button
@@ -41,11 +49,7 @@ class InputProfile extends Component {
 					</View>
 
 					<View style={{flex: 1, justifyContent: 'center'}}>
-						<Button
-							transparent
-							onPress={() => {
-								this.props.navigation.navigate('InputPIN')
-							}}>
+						<Button transparent onPress={this.onButtonDaftarHandle}>
 							<Text style={{color: 'white'}}>Daftar</Text>
 						</Button>
 					</View>
@@ -73,12 +77,13 @@ class InputProfile extends Component {
 					<View style={{marginTop: 30}}>
 						<TextInput
 							autoFocus={true}
-							keyboardType="phone-pad"
 							style={style.phoneNumber}
 							placeholderTextColor="white"
 							maxLength={13}
-							placeholder="Name"
-							onChangeText={this.phoneNumberHandle}
+							placeholder="Nama"
+							onChangeText={value => {
+								this.setState({phoneNumber: value})
+							}}
 							value={phoneNumber}
 							blurOnSubmit={false}
 						/>
@@ -87,7 +92,7 @@ class InputProfile extends Component {
 				<View style={style.head}>
 					<View style={{flex: 5}}></View>
 				</View>
-			</View>
+			</ScrollView>
 		)
 	}
 }

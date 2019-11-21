@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native'
 import {Button} from 'native-base'
 import PinView from 'react-native-pin-view'
 import qs from 'qs'
 import {connect} from 'react-redux'
-import {phoneCheck} from '../../redux/action/user'
+import {register, login} from '../../redux/action/user'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {TextInput} from 'react-native-gesture-handler'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
@@ -22,6 +22,28 @@ class InputProfile extends Component {
 			hasAccount: false,
 			isPhoneChecked: false,
 			code: '',
+		}
+	}
+
+	onLanjutButtonHandle = () => {
+		if (this.state.code === this.props.user.newUserData.pin) {
+			let userData = new FormData()
+			userData.append('name', this.props.user.newUserData.name)
+			userData.append('phone', this.props.user.newUserData.phone)
+			userData.append('pin', this.props.user.newUserData.pin)
+			this.props.dispatch(register(userData)).then(() => {
+				let loginData = {
+					phone: this.props.user.newUserData.phone,
+					pin: this.props.user.newUserData.pin,
+				}
+				this.props.dispatch(login(loginData)).then(() => {
+					if (this.props.user.isLogin) {
+						this.props.navigation.navigate('Home')
+					}
+				})
+			})
+		} else {
+			Alert.alert('pin anda tidak sama')
 		}
 	}
 	render() {
@@ -43,11 +65,7 @@ class InputProfile extends Component {
 					</View>
 
 					<View style={{flex: 1, justifyContent: 'center'}}>
-						<Button
-							transparent
-							onPress={() => {
-								this.props.navigation.navigate('Home')
-							}}>
+						<Button transparent onPress={this.onLanjutButtonHandle}>
 							<Text style={{color: 'white'}}>Lanjut</Text>
 						</Button>
 					</View>

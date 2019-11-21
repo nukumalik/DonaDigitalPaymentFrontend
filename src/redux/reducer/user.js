@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import AsyncStorage from '@react-native-community/async-storage'
 
 const initialState = {
@@ -9,6 +10,9 @@ const initialState = {
 	token: '',
 	isRegistered: false,
 	isRegistrationSucces: false,
+	otpCode: '',
+	otpExp: '',
+	newUserData: {},
 }
 
 const user = (state = initialState, action) => {
@@ -62,6 +66,55 @@ const user = (state = initialState, action) => {
 				isLogin: true,
 				token: action.token,
 			}
+		case 'REQUEST_OTP_PENDING':
+			return {
+				...state,
+				isLoading: true,
+			}
+		case 'REQUEST_OTP_REJECTED':
+			return {
+				...state,
+				isLoading: false,
+				isError: true,
+			}
+		case 'REQUEST_OTP_FULFILLED':
+			return {
+				...state,
+				isLoading: false,
+				isError: false,
+				otpCode: action.payload.data.data.otp_code,
+				phoneNumber: action.payload.data.data.phone,
+				otpExp: action.payload.data.data.expired_date,
+			}
+		case 'CREATE_USER_DATA':
+			let userDataTemp = {...state.newUserData, ...action.userData}
+			return {
+				...state,
+				newUserData: {...userDataTemp},
+			}
+		case 'REGISTER_PENDING':
+			return {
+				...state,
+				isLoading: true,
+			}
+		case 'REGISTER_REJECTED':
+			return {
+				...state,
+				isLoading: false,
+				isError: true,
+			}
+		case 'REGISTER_FULFILLED':
+			// storeData('username', action.payload.data.data.name)
+			// storeData('token', action.payload.data.token)
+			return {
+				...state,
+				isLoading: false,
+				isError: false,
+				// username: action.payload.data.data.name,
+				// token: action.payload.data.token,
+				// isLogin: true,
+			}
+
 		default:
 			return initialState
 	}
