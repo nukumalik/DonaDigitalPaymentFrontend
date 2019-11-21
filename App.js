@@ -14,6 +14,7 @@ import ListTransaction from './src/screens/transactions/ListTransaction'
 import DetailTransaction from './src/screens/transactions/DetailTransaction'
 import Topup from './src/screens/transactions/Topup'
 import TopupDetail from './src/screens/transactions/TopupDetail'
+import Transfer from './src/screens/transactions/Transfer'
 import Pulsa from './src/screens/pulses/Pulsa'
 
 export default class App extends Component {
@@ -35,9 +36,10 @@ const StackNavigation = createStackNavigator(
 		Topup: {screen: Topup},
 		TopupDetail: {screen: TopupDetail},
 		Pulsa: {screen: Pulsa},
+		Transfer: {screen: Transfer},
 	},
 	{
-		initialRouteName: 'TopupDetail',
+		initialRouteName: 'Transfer',
 		headerMode: 'none',
 	}
 )
