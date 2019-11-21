@@ -9,6 +9,9 @@ import store from './src/redux/store'
 //import page
 import SplashScreen from './src/screens/SplashScreen'
 import Login from './src/screens/users/Login'
+import InputProfile from './src/screens/users/InputProfile'
+import InputPIN from './src/screens/users/InputPIN'
+import InputPIN2 from './src/screens/users/InputPIN2'
 import PreLogin from './src/screens/users/PreLogin'
 import Home from './src/screens/Home'
 import Pin from './src/component/Pin'
@@ -39,9 +42,12 @@ const StackNavigation = createStackNavigator(
 		ListTransaction: {screen: ListTransaction},
 		DetailTransaction: {screen: DetailTransaction},
 		Pulsa: {screen: Pulsa},
+		InputProfile: {screen: InputProfile},
+		InputPIN: {screen: InputPIN},
+		InputPIN2: {screen: InputPIN2},
 	},
 	{
-		initialRouteName: 'SplashScreen',
+		initialRouteName: 'Login',
 		headerMode: 'none',
 	}
 )

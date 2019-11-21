@@ -5,9 +5,6 @@ import RBSheet from 'react-native-raw-bottom-sheet'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
 import {withNavigationFocus, withNavigation} from 'react-navigation'
 import qs from 'qs'
-
-import Pin from './Pin'
-
 import {connect} from 'react-redux'
 import {login} from '../redux/action/user'
 
@@ -19,6 +16,7 @@ class ModalOTP extends Component {
 			hasAccount: false,
 			code: '',
 			isChecked: false,
+			onOTP: false,
 			isRBSheetOpened: false,
 		}
 	}
@@ -35,13 +33,6 @@ class ModalOTP extends Component {
 	pinInput = React.createRef()
 
 	_checkCode = code => {
-		// if (code != '123456') {
-		// 	this.pinInput.current.shake().then(() => this.setState({code: ''}))
-		// } else {
-		// 	this.props.navigation.navigate('Home')
-		// 	this.setState({isChecked: true})
-		// 	this.RBSheet.close()
-		// }
 		let dataLogin = {
 			phone: this.props.phoneNumber,
 			pin: code,
@@ -63,7 +54,7 @@ class ModalOTP extends Component {
 	}
 
 	render() {
-		const {isLoading, hasAccount, code} = this.state
+		const {isLoading, hasAccount, code, onOTP} = this.state
 		this._checkPhoneNumber(this.props.number)
 		if (this.props.isPhoneChecked && !this.state.isRBSheetOpened && !this.props.user.isLoading) {
 			this.RBSheet.open()
@@ -147,6 +138,10 @@ class ModalOTP extends Component {
 										blurOnSubmit={false}
 										{...props}
 										style={style.textInput}
+										onChangeText={() => {
+											this.props.navigation.navigate('InputProfile')
+											this.RBSheet.close()
+										}}
 									/>
 								</View>
 							</View>
@@ -213,6 +208,53 @@ class ModalOTP extends Component {
 								<Button transparent>
 									<Text style={style.textfooter}>Lupa PIN?</Text>
 								</Button>
+							</View>
+						</View>
+					)}
+					{this.onOTP && (
+						<View style={{flex: 1}}>
+							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', alignContent: 'center'}}>
+								<Text style={{fontWeight: 'bold', margin: 10}}>Masukan PIN DANA anda</Text>
+								{/* <Text>Masukan PIN DANA ANDA</Text> */}
+							</View>
+							{/* <Pin /> */}
+							<View style={style.container}>
+								{/* Custom placeholder & mask */}
+								<View style={style.section}>
+									<SmoothPinCodeInput
+										ref={this.pinInput}
+										value={code}
+										codeLength={6}
+										autoFocus={true}
+										onTextChange={code => this.setState({code})}
+										onFulfill={this._checkCode}
+										onBackspace={() => console.log('No more back.')}
+										placeholder={
+											<View
+												style={{
+													width: 5,
+													height: 5,
+													borderRadius: 25,
+													opacity: 0.3,
+													backgroundColor: 'black',
+												}}></View>
+										}
+										mask={
+											<View
+												style={{
+													width: 5,
+													height: 5,
+													borderRadius: 25,
+													backgroundColor: 'black',
+												}}></View>
+										}
+										maskDelay={1000}
+										password={true}
+										cellStyle={null}
+										cellStyleFocused={null}
+										value={code}
+									/>
+								</View>
 							</View>
 						</View>
 					)}
