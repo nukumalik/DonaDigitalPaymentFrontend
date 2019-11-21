@@ -9,10 +9,21 @@ import ListBerita from '../component/ListBerita'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import SafeAreaView from 'react-native-safe-area-view'
 
-export default class Home extends Component {
+import {connect} from 'react-redux'
+import {getBalance} from '../redux/action/balance'
+
+class Home extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			balance: 0,
+		}
+	}
+
+	componentDidMount() {
+		this.props.dispatch(getBalance(this.props.user.userData.id)).then(() => {
+			this.setState({balance: this.props.balance.amount})
+		})
 	}
 
 	render() {
@@ -35,7 +46,7 @@ export default class Home extends Component {
 									}}>
 									<Image source={require('../../assets/images/logo.png')} />
 									<Text style={{color: 'white', fontSize: 10, opacity: 0.8}}>Rp</Text>
-									<Text style={style.textNavHeader}>0</Text>
+									<Text style={style.textNavHeader}>{this.state.balance}</Text>
 									<Icon size={15} color="white" name="chevron-down" />
 								</View>
 							</View>
@@ -305,6 +316,13 @@ export default class Home extends Component {
 		)
 	}
 }
+
+const mapStateToProps = state => ({
+	user: state.user,
+	balance: state.balance,
+})
+
+export default connect(mapStateToProps)(Home)
 
 const style = StyleSheet.create({
 	textNavHeader: {
