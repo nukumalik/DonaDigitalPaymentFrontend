@@ -148,6 +148,7 @@ const style = StyleSheet.create({
 	},
 	bottomContainer: {
 		marginTop: 10,
+		marginBottom: 60,
 	},
 	iconButton: {
 		marginLeft: 'auto',
