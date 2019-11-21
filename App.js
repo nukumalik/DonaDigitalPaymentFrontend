@@ -20,6 +20,7 @@ import ListBerita from './src/component/ListBerita'
 import ListTransaction from './src/screens/transactions/ListTransaction'
 import DetailTransaction from './src/screens/transactions/DetailTransaction'
 import Pulsa from './src/screens/pulses/Pulsa'
+import TabNav from './src/screens/tabs'
 
 export default class App extends Component {
 	render() {
@@ -45,6 +46,7 @@ const StackNavigation = createStackNavigator(
 		InputProfile: {screen: InputProfile},
 		InputPIN: {screen: InputPIN},
 		InputPIN2: {screen: InputPIN2},
+		TabNav: {screen: TabNav},
 	},
 	{
 		initialRouteName: 'SplashScreen',

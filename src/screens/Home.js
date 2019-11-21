@@ -277,7 +277,7 @@ class Home extends Component {
 				</View>
 
 				{/* Bottom Navigation  */}
-				<View
+				{/* <View
 					style={{
 						height: 70,
 						flexDirection: 'row',
@@ -311,7 +311,7 @@ class Home extends Component {
 						<Image source={require('../../assets/images/saya.png')} />
 						<Text>Saya</Text>
 					</View>
-				</View>
+				</View> */}
 			</View>
 		)
 	}
