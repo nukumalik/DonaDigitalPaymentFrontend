@@ -44,7 +44,7 @@ class ModalOTP extends Component {
 			.dispatch(login(qs.stringify(dataLogin)))
 			.then(() => {
 				if (this.props.user.isLogin) {
-					this.props.navigation.navigate('Home')
+					this.props.navigation.navigate('TabNav')
 					this.setState({isChecked: true})
 					this.RBSheet.close()
 				} else {
@@ -62,7 +62,7 @@ class ModalOTP extends Component {
 			phone: this.props.user.phoneNumber,
 		}
 		await axios
-			.post('http://localhost:5000/api/v1/users/verify-otp', qs.stringify(otpCode), {
+			.post('http://192.168.0.121:5000/api/v1/users/verify-otp', qs.stringify(otpCode), {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			})
 			.then(response => {

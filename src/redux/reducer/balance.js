@@ -5,7 +5,7 @@ const initialState = {
 	amount: 0,
 }
 
-const user = (state = initialState, action) => {
+const balance = (state = initialState, action) => {
 	switch (action.type) {
 		case 'GET_BALANCE_PENDING':
 			return {
@@ -26,8 +26,8 @@ const user = (state = initialState, action) => {
 				amount: action.payload.data.data[0].amount,
 			}
 		default:
-			return initialState
+			return {...state}
 	}
 }
 
-export default user
+export default balance

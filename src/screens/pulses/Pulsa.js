@@ -1,9 +1,24 @@
-import React from 'react'
-import {Text, View, ScrollView} from 'react-native'
+import React, {useState} from 'react'
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native'
 import {Tabs, Tab, Content, Header, Left, Body, Right, Row, Col, Card, CardItem, Container, Input, Button} from 'native-base'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import {connect} from 'react-redux'
+import {transaction} from '../../redux/action/transactions'
+
 const Pulsa = props => {
+	const [phone, setPhone] = useState()
+
+	const onCardPressHandle = amount => {
+		let dataTransactions = {
+			type: 'ppob',
+			amount: amount,
+			phone: phone,
+			type_ppob: 'pulsa',
+		}
+		props.dispatch(transaction(props.user.userData.id, dataTransactions)).then(() => props.navigation.navigate('TabNav'))
+	}
+
 	return (
 		<>
 			<Header style={style.header}>
@@ -28,7 +43,7 @@ const Pulsa = props => {
 					</Row>
 					<Row style={{borderWidth: 1, borderColor: '#DFDFE5', height: 40, marginTop: 25, borderRadius: 4}}>
 						<Col>
-							<Input style={{height: 20}} />
+							<Input style={{height: 20}} onChangeText={value => setPhone(value)} />
 						</Col>
 						<Col style={{width: '20%'}}></Col>
 					</Row>
@@ -125,17 +140,19 @@ const Pulsa = props => {
 										</Card>
 									</Col>
 									<Col style={style.col}>
-										<Card style={style.card}>
-											<Row>
-												<Col style={{width: 25}}>
-													<Text style={{color: '#616161', fontSize: 20, fontWeight: 'bold'}}>50</Text>
-												</Col>
-												<Col>
-													<Text style={{color: '#616161', fontWeight: 'bold'}}>Rb</Text>
-												</Col>
-											</Row>
-											<Text style={{fontSize: 16, color: '#108EE9'}}>Harga Rp50.000</Text>
-										</Card>
+										<TouchableOpacity onPress={() => onCardPressHandle(50000)}>
+											<Card style={style.card}>
+												<Row>
+													<Col style={{width: 25}}>
+														<Text style={{color: '#616161', fontSize: 20, fontWeight: 'bold'}}>50</Text>
+													</Col>
+													<Col>
+														<Text style={{color: '#616161', fontWeight: 'bold'}}>Rb</Text>
+													</Col>
+												</Row>
+												<Text style={{fontSize: 16, color: '#108EE9'}}>Harga Rp50.000</Text>
+											</Card>
+										</TouchableOpacity>
 									</Col>
 								</Row>
 								<Row>
@@ -276,6 +293,12 @@ const Pulsa = props => {
 	)
 }
 
+const mapStateToProps = state => ({
+	user: state.user,
+})
+
+export default connect(mapStateToProps)(Pulsa)
+
 const style = {
 	header: {
 		backgroundColor: '#108EE9',
@@ -316,5 +339,3 @@ const style = {
 		borderTopColor: '#DFDFE5',
 	},
 }
-
-export default Pulsa

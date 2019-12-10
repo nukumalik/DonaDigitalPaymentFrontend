@@ -9,6 +9,8 @@ import ListBerita from '../component/ListBerita'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import SafeAreaView from 'react-native-safe-area-view'
 
+import {NavigationEvents} from 'react-navigation'
+
 import {connect} from 'react-redux'
 import {getBalance} from '../redux/action/balance'
 
@@ -29,6 +31,7 @@ class Home extends Component {
 	render() {
 		return (
 			<View style={{flex: 1}}>
+				<NavigationEvents onDidFocus={() => this.componentDidMount()} />
 				<View style={{flex: 1}}>
 					{/* Header section */}
 					<View style={{height: 110, backgroundColor: '#108EE9'}}>
@@ -61,10 +64,12 @@ class Home extends Component {
 								<Image source={require('../../assets/images/pindai.png')} />
 								<Text style={style.textNavHeader}>Pindai</Text>
 							</View>
-							<View style={style.iconHeader}>
-								<Image source={require('../../assets/images/isisaldo.png')} />
-								<Text style={style.textNavHeader}>Isi Saldo</Text>
-							</View>
+							<TouchableOpacity style={{flex: 1}} onPress={() => this.props.navigation.navigate('Topup')}>
+								<View style={style.iconHeader}>
+									<Image source={require('../../assets/images/isisaldo.png')} />
+									<Text style={style.textNavHeader}>Isi Saldo</Text>
+								</View>
+							</TouchableOpacity>
 							<View style={style.iconHeader}>
 								<Image source={require('../../assets/images/kirim.png')} />
 								<Text style={style.textNavHeader}>Kirim</Text>
@@ -111,6 +116,7 @@ class Home extends Component {
 
 									<Button
 										title="Beli"
+										onPress={() => this.props.navigation.navigate('Pulsa')}
 										style={{
 											borderRadius: 5,
 											width: 80,

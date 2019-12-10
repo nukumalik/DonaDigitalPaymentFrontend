@@ -8,7 +8,7 @@ const Topup = props => {
 		<>
 			<Header style={{backgroundColor: '#108EE9'}}>
 				<Left>
-					<TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
+					<TouchableOpacity onPress={() => props.navigation.navigate('TabNav')}>
 						<Icon name="chevron-left" size={35} style={{color: '#fff'}} />
 					</TouchableOpacity>
 				</Left>

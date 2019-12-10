@@ -26,7 +26,7 @@ class SplashScreen extends Component {
 			// error reading value
 		}
 		if (this.props.user.isLogin) {
-			this.props.navigation.navigate('Home')
+			this.props.navigation.navigate('TabNav')
 		} else {
 			setTimeout(() => {
 				this.props.navigation.navigate('PreLogin')

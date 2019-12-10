@@ -1,9 +1,17 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, ScrollView, Image} from 'react-native'
+import {Text, View, StyleSheet, ScrollView, Image, TouchableNativeFeedback, TouchableOpacity} from 'react-native'
 import {Button, List, ListItem} from 'native-base'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler'
 
-export default class Profile extends Component {
+import {connect} from 'react-redux'
+import {logout} from '../../redux/action/user'
+
+class Profile extends Component {
+	onLogoutButtonHanlde = () => {
+		this.props.dispatch(logout())
+		this.props.navigation.navigate('PreLogin')
+	}
 	render() {
 		return (
 			<ScrollView style={style.container}>
@@ -89,7 +97,7 @@ export default class Profile extends Component {
 							<Text style={style.menuText}>Versi App</Text>
 							<Icon name="chevron-right" color="grey" size={25} style={{marginLeft: 'auto'}} />
 						</ListItem>
-						<ListItem style={style.listItem}>
+						<ListItem style={style.listItem} onPress={this.onLogoutButtonHanlde}>
 							<Text style={style.menuText}>Keluar</Text>
 							<Icon name="chevron-right" color="grey" size={25} style={{marginLeft: 'auto'}} />
 						</ListItem>
@@ -99,6 +107,12 @@ export default class Profile extends Component {
 		)
 	}
 }
+
+const mapStateToProps = state => ({
+	user: state.user,
+})
+
+export default connect(mapStateToProps)(Profile)
 
 const style = StyleSheet.create({
 	container: {

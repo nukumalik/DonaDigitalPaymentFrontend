@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 //page import
 

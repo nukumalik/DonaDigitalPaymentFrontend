@@ -62,6 +62,7 @@ const user = (state = initialState, action) => {
 			}
 		case 'KEEP_LOGIN':
 			return {
+				...state,
 				isLoading: false,
 				isError: false,
 				userData: {...action.userData},
@@ -116,9 +117,14 @@ const user = (state = initialState, action) => {
 				// token: action.payload.data.token,
 				// isLogin: true,
 			}
+		case 'LOGOUT':
+			clearAllData()
+			return {
+				...state,
+			}
 
 		default:
-			return initialState
+			return {...state}
 	}
 }
 
